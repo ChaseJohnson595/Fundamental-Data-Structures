@@ -88,6 +88,11 @@ int Heap::removeMin()
     return min_value;
 }
 
+int Heap::getRoot()
+{
+    return elements[1];
+}
+
 ostream& operator<<(ostream& out, const Heap h)
 {
     int n = h.elements.size() - 1;
