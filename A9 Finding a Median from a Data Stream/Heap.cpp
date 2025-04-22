@@ -39,11 +39,30 @@ void Heap::upHeap()
 void Heap::downHeap()
 {
     // 1. Copy the last element to the root position
+    elements[1] = elements[elements.size() - 1];
+    int root_data = elements[1];
+    int position = 1;
 
     // 2. pop_back() to remove the duplicate while maintaining the complete binary tree
+    elements.pop_back();
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
+    while (elements[position] > elements[position * 2] || elements[position] > elements[position * 2 + 1])
+    {
+        if (elements[position] > elements[position * 2])
+        {
+            elements[position] = elements[position * 2];
+            position *= 2;
+            elements[position] = root_data;
+        }
+        else 
+        {
+            elements[position] = elements[position * 2 + 1];
+            position = position * 2 + 1;
+            elements[position] = root_data;
+        }
+    }
 
     // 4. Exit Condition:
         // a. if the parent's value < both children
@@ -65,6 +84,4 @@ int Heap::removeMin()
     downHeap();
 
     return min_value;
-
-
 }
