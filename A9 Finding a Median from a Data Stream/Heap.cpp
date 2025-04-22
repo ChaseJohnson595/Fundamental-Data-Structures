@@ -1,3 +1,5 @@
+#include <iomanip>
+#include <cmath>
 #include "Heap.h"
 
 Heap::Heap()
@@ -84,4 +86,34 @@ int Heap::removeMin()
     downHeap();
 
     return min_value;
+}
+
+ostream& operator<<(ostream& out, const Heap h)
+{
+    int n = h.elements.size() - 1;
+    if (n == 0) {
+        out << "Heap is empty.\n";
+        return out;
+    }
+
+    int levels = std::log2(n) + 1;
+    int index = 0;
+
+    for (int level = 0; level < levels; ++level) {
+        int nodesInLevel = std::pow(2, level);
+        int startIdx = std::pow(2, level) - 1;
+        int endIdx = std::min((int)std::pow(2, level + 1) - 2, n - 1);
+
+        // Calculate spacing
+        int totalWidth = std::pow(2, levels) * 2;
+        int spaceBetween = totalWidth / (nodesInLevel + 1);
+
+        // Print nodes at current level
+        for (int i = startIdx; i <= endIdx && i < n; ++i) {
+            out << std::setw(spaceBetween) << h.elements[i+1];
+        }
+        out << "\n";
+    }
+
+    return out;
 }
