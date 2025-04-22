@@ -1,0 +1,23 @@
+#ifndef HEAP_H
+#define HEAP_H
+#include <ostream>
+#include <vector>
+
+using namespace std;
+
+class Heap
+{
+private:
+    vector<int> elements;
+    void upHeap();
+    void downHeap();
+public:
+    Heap();
+    void insert(int);
+    int  removeMin();   // no parameter --> return the value at the root
+
+    // If the left operand is not heap type, the operator cannot be a member
+    friend ostream& operator<<(ostream&, const Heap);
+};
+
+#endif

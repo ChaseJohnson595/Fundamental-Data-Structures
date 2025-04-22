@@ -1,8 +1,8 @@
 median: main.o
-	c++ main.o -o median
+	g++ main.cpp Heap.cpp -o median.exe
 
-main.o: MinHeap.h Node.h
-	c++ -c main.cpp
+main.o: main.cpp Heap.h Heap.cpp
+	g++ -c main.cpp
 
 clean:
-	del *.o median.exe
+	del *.o *.exe
