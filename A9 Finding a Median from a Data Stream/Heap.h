@@ -15,6 +15,7 @@ public:
     Heap();
     void insert(int);
     int  removeMin();   // no parameter --> return the value at the root
+    int  getSize();
     int  getRoot();
 
     // If the left operand is not heap type, the operator cannot be a member

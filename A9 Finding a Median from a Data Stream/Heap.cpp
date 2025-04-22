@@ -50,7 +50,7 @@ void Heap::downHeap()
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
-    while (elements[position] > elements[position * 2] || elements[position] > elements[position * 2 + 1])
+    while (elements[position*2] && (elements[position] > elements[position * 2] || elements[position] > elements[position * 2 + 1]))
     {
         if (elements[position] > elements[position * 2])
         {
@@ -76,16 +76,25 @@ int Heap::removeMin()
 {
     // Case 0: No elements
     if (elements.size() == 1)
-        return -1;
+        return -1;                                              // Change to exception handling instead of returning negative
 
     // Case 1: Only one element in the heap
     int min_value = elements[1];
     if (elements.size() == 2)
+    {
+        elements.pop_back();
+        return min_value;
+    }
     
     // Case 2: more than one element in the heap --> downHeap
     downHeap();
 
     return min_value;
+}
+
+int Heap::getSize()
+{
+    return elements.size();
 }
 
 int Heap::getRoot()
@@ -95,6 +104,14 @@ int Heap::getRoot()
 
 ostream& operator<<(ostream& out, const Heap h)
 {
+    /*
+    for (int i = 1; i <= h.elements.size(); i++)
+    {
+        out << h.elements[i] << " ";
+    }
+    out << endl;
+    */
+    
     int n = h.elements.size() - 1;
     if (n == 0) {
         out << "Heap is empty.\n";
@@ -119,6 +136,6 @@ ostream& operator<<(ostream& out, const Heap h)
         }
         out << "\n";
     }
-
+    
     return out;
 }

@@ -30,7 +30,7 @@ void MaxHeap::downHeap()
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
-    while (elements[position] < elements[position * 2] || elements[position] < elements[position * 2 + 1])
+    while (elements[position*2] && (elements[position] < elements[position * 2] || elements[position] < elements[position * 2 + 1]))
     {
         if (elements[position] < elements[position * 2])
         {
@@ -56,8 +56,11 @@ int MaxHeap::removeMax()
     // Case 1: Only one element in the heap
     int max_value = elements[1];
     if (elements.size() == 2)
+    {
+        elements.pop_back();
         return max_value;
-    
+    }
+
     // Case 2: more than one element in the heap --> downHeap
     else if (elements.size() > 2)
         downHeap();
