@@ -1,17 +1,16 @@
 #include <iostream>
 #include "Heap.h"
+#include "MaxHeap.h"
 
 int main()
 {
     Heap minHeap;
+    MaxHeap maxHeap;
 
-    minHeap.insert(10);
-    minHeap.insert(20);
-    minHeap.insert(30);
-    minHeap.insert(40);
-    minHeap.insert(15);
+    
 
     std::cout << minHeap << std::endl;
+    std::cout << maxHeap << std::endl;
 
     return 0;
 }

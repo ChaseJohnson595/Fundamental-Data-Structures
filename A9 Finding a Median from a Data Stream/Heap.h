@@ -7,10 +7,10 @@ using namespace std;
 
 class Heap
 {
-private:
+protected:
     vector<int> elements;
-    void upHeap();
-    void downHeap();
+    virtual void upHeap();
+    virtual void downHeap();
 public:
     Heap();
     void insert(int);
