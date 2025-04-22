@@ -3,7 +3,6 @@
 #include <vector>
 #include "Node.h"
 #include "MinHeap.h"
-#include "MaxHeap.h"
 
 int main()
 {
@@ -16,7 +15,7 @@ int main()
 
     MinHeap<int> mHeap(nodes);
 
-    
+    mHeap.print();
 
 
     return 0;
