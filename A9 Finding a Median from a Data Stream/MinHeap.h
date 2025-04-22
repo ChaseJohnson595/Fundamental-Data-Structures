@@ -8,7 +8,7 @@
 template <typename T>
 class MinHeap
 {
-protected:
+private:
     std::vector<Node<T>*> minHeap;
 public:
     MinHeap();
@@ -56,22 +56,7 @@ Node<T>* MinHeap<T>::pop()
     
 }
 */
-/*
-template <typename T>
-void MinHeap<T>::print()
-{
-    for (int i = 0; i < minHeap.size(); i++)
-    {
-        if (i == 0)
-        {
-            std::cout << minHeap[0]->data << std::endl;
-            continue;
-        }
-        
-        
-    }
-}
-*/
+
 template <typename T>
 void MinHeap<T>::print() {
 
