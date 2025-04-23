@@ -1,9 +1,10 @@
 #include "MaxHeap.h"
+#include <iostream>
 
 void MaxHeap::upHeap()
 {
-    //int newData = elements.back();
-    int new_data = elements[elements.size() -1];
+    int new_data = elements.back();
+    //int new_data = elements[elements.size() -1];
 
     int position = elements.size()-1;
     while (position > 1 && elements[position/2] < new_data)
@@ -30,6 +31,33 @@ void MaxHeap::downHeap()
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
+    
+    int size = elements.size() - 1;
+    while (position * 2 <= size)
+    {   
+        int left = position * 2;                                    // Position of the left child
+        int right = (position * 2) + 1;                               // Position of the right child
+        int largerChild = left;                                     // Assuming there might only be a left child, set the smaller to the left
+
+        if (right <= size && elements[right] > elements[left])      // If there is a right child AND it's smaller than the left, set it as the smallerChild
+        {
+            largerChild = position * 2 + 1;
+        }
+
+        if (root_data < elements[largerChild])
+        {
+            elements[position] = elements[largerChild];
+            position = largerChild;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    elements[position] = root_data;
+    
+    /*
     while (elements[position*2] && (elements[position] < elements[position * 2] || elements[position] < elements[position * 2 + 1]))
     {
         if (elements[position] < elements[position * 2])
@@ -45,6 +73,7 @@ void MaxHeap::downHeap()
             elements[position] = root_data;
         }
     }
+    */
 }
 
 int MaxHeap::removeMax()

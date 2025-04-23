@@ -50,7 +50,36 @@ void Heap::downHeap()
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
-    while (elements[position*2] && (elements[position] > elements[position * 2] || elements[position] > elements[position * 2 + 1]))
+
+    int size = elements.size() - 1;
+    while (position * 2 <= size)
+    {
+        int left = position * 2;                                    // Position of the left child
+        int right = position * 2 + 1;                               // Position of the right child
+        int smallerChild = left;                                    // Assuming there might only be a left child, set the smaller to the left
+
+        if (right <= size && elements[right] < elements[left])      // If there is a right child AND it's smaller than the left, set it as the smallerChild
+        {
+            smallerChild = right;
+        }
+
+        // Main processing for swapping elements
+        if (elements[position] > elements[smallerChild])            // If the parent is larger than the child, replace the parent with the child
+        {
+            elements[position] = elements[smallerChild];
+            position = smallerChild;
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    elements[position] = root_data;
+    
+    
+    /*
+    while (elements[position*2] && (elements[position] > elements[position * 2]) || (elements[position * 2 + 1] && elements[position] > elements[position * 2 + 1]))
     {
         if (elements[position] > elements[position * 2])
         {
@@ -65,6 +94,7 @@ void Heap::downHeap()
             elements[position] = root_data;
         }
     }
+    */
 
     // 4. Exit Condition:
         // a. if the parent's value < both children
@@ -105,7 +135,7 @@ int Heap::getRoot()
 ostream& operator<<(ostream& out, const Heap h)
 {
     /*
-    for (int i = 1; i <= h.elements.size(); i++)
+    for (int i = 1; i <= h.elements.size()-1; i++)
     {
         out << h.elements[i] << " ";
     }

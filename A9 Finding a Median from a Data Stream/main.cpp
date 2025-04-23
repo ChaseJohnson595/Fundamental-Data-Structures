@@ -29,11 +29,25 @@ int main()
         else if (maxHeap.getSize() - minHeap.getSize() == 2)
         {
             minHeap.insert(maxHeap.removeMax());
-        }
+        }        
     }
 
-    std::cout << minHeap << std::endl;
-    std::cout << maxHeap << std::endl;
+    std::cout << "\nMin: " << std::endl << minHeap << std::endl;
+    std::cout << "Max: " << std::endl << maxHeap << std::endl;
+    
+    if (minHeap.getSize() == maxHeap.getSize())
+    {
+        double median = (static_cast<double>(minHeap.getRoot()) + static_cast<double>(maxHeap.getRoot())) / 2;
+        std::cout << "Median: " << median << std::endl << std::endl; 
+    }
+    else if (minHeap.getSize() > maxHeap.getSize())
+    {
+        std::cout << "Median: " << minHeap.getRoot() << std::endl << std::endl; 
+    }
+    else 
+    {
+        std::cout << "Median: " << maxHeap.getRoot() << std::endl << std::endl;
+    }
 
     return 0;
 }
