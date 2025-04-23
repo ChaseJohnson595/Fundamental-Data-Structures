@@ -23,10 +23,10 @@ void Heap::insert(int new_data)
 void Heap::upHeap()
 {
     //int newData = elements.back();
-    int new_data = elements[elements.size() -1];
+    int new_data = elements[elements.size() -1];                            // Creating a local variable for the new data
 
     int position = elements.size()-1;
-    while (position > 1 && elements[position/2] > new_data)
+    while (position > 1 && elements[position/2] > new_data)                 // While correct position hasn't been found, keep pushing it up
     {
         // 1. bring down the parent's value to position
         elements[position] = elements[position/2];
@@ -50,10 +50,10 @@ void Heap::downHeap()
 
     // 3. Loop continuation:
         // a.  if the parent's value > left child's or right child's, the smaller of children must be swapped with the parent
-
     int size = elements.size() - 1;
     while (position * 2 <= size)
     {
+        // Determining the smaller child
         int left = position * 2;                                    // Position of the left child
         int right = position * 2 + 1;                               // Position of the right child
         int smallerChild = left;                                    // Assuming there might only be a left child, set the smaller to the left
@@ -63,8 +63,8 @@ void Heap::downHeap()
             smallerChild = right;
         }
 
-        // Main processing for swapping elements
-        if (elements[position] > elements[smallerChild])            // If the parent is larger than the child, replace the parent with the child
+        // Swapping the elements
+        if (root_data > elements[smallerChild])                     // If the original data is larger than the next child, replace the parent with the child
         {
             elements[position] = elements[smallerChild];
             position = smallerChild;
@@ -76,30 +76,6 @@ void Heap::downHeap()
     }
     
     elements[position] = root_data;
-    
-    
-    /*
-    while (elements[position*2] && (elements[position] > elements[position * 2]) || (elements[position * 2 + 1] && elements[position] > elements[position * 2 + 1]))
-    {
-        if (elements[position] > elements[position * 2])
-        {
-            elements[position] = elements[position * 2];
-            position *= 2;
-            elements[position] = root_data;
-        }
-        else 
-        {
-            elements[position] = elements[position * 2 + 1];
-            position = position * 2 + 1;
-            elements[position] = root_data;
-        }
-    }
-    */
-
-    // 4. Exit Condition:
-        // a. if the parent's value < both children
-        // b. if the parent becomes a leaf --> no children
-
 }
 
 int Heap::removeMin()
@@ -110,6 +86,7 @@ int Heap::removeMin()
 
     // Case 1: Only one element in the heap
     int min_value = elements[1];
+    
     if (elements.size() == 2)
     {
         elements.pop_back();

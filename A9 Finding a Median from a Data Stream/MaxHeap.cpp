@@ -36,7 +36,7 @@ void MaxHeap::downHeap()
     while (position * 2 <= size)
     {   
         int left = position * 2;                                    // Position of the left child
-        int right = (position * 2) + 1;                               // Position of the right child
+        int right = (position * 2) + 1;                             // Position of the right child
         int largerChild = left;                                     // Assuming there might only be a left child, set the smaller to the left
 
         if (right <= size && elements[right] > elements[left])      // If there is a right child AND it's smaller than the left, set it as the smallerChild
