@@ -1,7 +1,7 @@
 median: main.o
-	g++ main.cpp Heap.cpp MaxHeap.cpp -o median.exe
+	g++ main.cpp -o median.exe
 
-main.o: main.cpp Heap.h MaxHeap.h MaxHeap.cpp Heap.cpp
+main.o: main.cpp Heap.h MaxHeap.h
 	g++ -c main.cpp
 
 clean:

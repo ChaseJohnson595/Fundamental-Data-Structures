@@ -6,10 +6,20 @@
 
 int main()
 {
-    Heap minHeap;
-    MaxHeap maxHeap;
+    Heap<int> minHeap;
+    MaxHeap<int> maxHeap;
 
-    std::vector<int> input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<int> input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    
+    /*
+    try{
+        minHeap.removeMin();
+    }
+    catch (const Heap<int>::EmptyHeapException e)
+    {
+        std::cout << "Error: Heap is empty" << std::endl;
+    }
+    */
 
     for (int i = 0; i < input.size(); i++)
     {
@@ -21,15 +31,23 @@ int main()
         {
             maxHeap.insert(input[i]);
         }
-
-        if (minHeap.getSize() - maxHeap.getSize() == 2)
+        
+        try
         {
-            maxHeap.insert(minHeap.removeMin());
+            if (minHeap.getSize() - maxHeap.getSize() == 2)
+            {
+                maxHeap.insert(minHeap.removeMin());
+            }
+            else if (maxHeap.getSize() - minHeap.getSize() == 2)
+            {
+                minHeap.insert(maxHeap.removeMax());
+            }
         }
-        else if (maxHeap.getSize() - minHeap.getSize() == 2)
+        catch(const Heap<int>::EmptyHeapException& e)
         {
-            minHeap.insert(maxHeap.removeMax());
-        }        
+            std::cerr << "Heap is empty";
+        }
+        
     }
 
     std::cout << "\nMin: " << std::endl << minHeap << std::endl;
@@ -48,6 +66,8 @@ int main()
     {
         std::cout << "Median: " << maxHeap.getRoot() << std::endl << std::endl;
     }
-
+    
     return 0;
 }
+
+
